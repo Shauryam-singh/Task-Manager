@@ -32,7 +32,6 @@ const AddTask = () => {
     };
 
     const handleStartDateChange = (date) => {
-        // Check if date is a valid Date object
         if (date instanceof Date && !isNaN(date)) {
             setFormData({
                 ...formData,
@@ -41,7 +40,6 @@ const AddTask = () => {
         }
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const serializableFormData = {
@@ -49,7 +47,6 @@ const AddTask = () => {
             startDate: formData.startDate.toISOString(),
             endDate: formData.endDate ? formData.endDate.toISOString() : null
         };
-        console.log(serializableFormData);
         dispatch(addTask(serializableFormData));
         setFormData({
             title: '',
@@ -58,111 +55,108 @@ const AddTask = () => {
             endDate: null,
             status: 'Pending',
             assignee: '',
-            priority: ''
+            priority: 'P0'
         });
     };
 
-
     return (
-        <div className="w-[70%] mx-auto">
-            <div className=''>
-                <h1 className="text-3xl font-bold my-8 text-center">Add New Task</h1>
-                <div className='grid place-items-center'>
-                    <form className="w-full mt-12 sm:mt-0 max-w-lg" onSubmit={handleSubmit}>
-                        <div className="flex flex-wrap -mx-3 mb-2 sm:mb-6">
-                            <div className="w-full px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="title">
-                                    Title
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="title"
-                                    type="text"
-                                    placeholder="Task Title"
-                                    name="title"
-                                    value={formData.title}
-                                    onChange={handleChange}
-                                />
-                            </div>
+        <div className="container mx-auto mt-10">
+            <h1 className="text-4xl font-bold text-center text-indigo-600 mb-8">Add New Task</h1>
+            <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl mx-auto">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Title */}
+                    <div>
+                        <label htmlFor="title" className="block text-sm font-semibold text-gray-700">Title</label>
+                        <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            placeholder="Task Title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                            required
+                        />
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                        <label htmlFor="description" className="block text-sm font-semibold text-gray-700">Description</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            placeholder="Task Description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3 h-24"
+                            required
+                        ></textarea>
+                    </div>
+
+                    {/* Dates */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label htmlFor="startDate" className="block text-sm font-semibold text-gray-700">Start Date</label>
+                            <DatePicker
+                                selected={formData.startDate}
+                                onChange={handleStartDateChange}
+                                dateFormat="dd/MM/yyyy"
+                                className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                            />
                         </div>
-                        <div className="flex flex-wrap -mx-3 mb-2 sm:mb-6">
-                            <div className="w-full px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="description">
-                                    Description
-                                </label>
-                                <textarea
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="description"
-                                    placeholder="Task Description"
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                />
-                            </div>
+                        <div>
+                            <label htmlFor="endDate" className="block text-sm font-semibold text-gray-700">End Date</label>
+                            <DatePicker
+                                selected={formData.endDate}
+                                onChange={handleEndDateChange}
+                                dateFormat="dd/MM/yyyy"
+                                className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                            />
                         </div>
-                        <div className="flex flex-wrap -mx-3 mb-2 sm:mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="startDate">
-                                    Start Date
-                                </label>
-                                <DatePicker
-                                    selected={formData.startDate}
-                                    onChange={handleStartDateChange}
-                                    dateFormat="dd/MM/yyyy"
-                                    className="appearance-none block w-[280px] sm:w-[245px] bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                />
-                            </div>
-                            <div className="w-full md:w-1/2 px-3 mb-2 sm:mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="endDate">
-                                    End Date
-                                </label>
-                                <DatePicker
-                                    selected={formData.endDate}
-                                    onChange={handleEndDateChange}
-                                    dateFormat="dd/MM/yyyy"
-                                    className="appearance-none block w-[280px] sm:w-[245px] bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                />
-                            </div>
+                    </div>
+
+                    {/* Status and Priority */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label htmlFor="status" className="block text-sm font-semibold text-gray-700">Status</label>
+                            <select
+                                id="status"
+                                name="status"
+                                value={formData.status}
+                                onChange={handleChange}
+                                className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                            >
+                                <option value="Pending">Pending</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Deployed">Deployed</option>
+                                <option value="Deferred">Deferred</option>
+                            </select>
                         </div>
-                        <div className="flex flex-wrap -mx-3 mb-2 sm:mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="status">
-                                    Status
-                                </label>
-                                <select
-                                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="status"
-                                    name="status"
-                                    value={formData.status}
-                                    onChange={handleChange}
-                                >
-                                    <option value="Pending">Pending</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Completed">Completed</option>
-                                    <option value="Deployed">Deployed</option>
-                                    <option value="Deferred">Deferred</option>
-                                </select>
-                            </div>
-                            <div className="w-full md:w-1/2 px-3">
-                                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="priority">
-                                    Priority
-                                </label>
-                                <select
-                                    className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="priority"
-                                    name="priority"
-                                    value={formData.priority}
-                                    onChange={handleChange}
-                                >
-                                    <option value="P0">P0</option>
-                                    <option value="P1">P1</option>
-                                    <option value="P2">P2</option>
-                                </select>
-                            </div>
+                        <div>
+                            <label htmlFor="priority" className="block text-sm font-semibold text-gray-700">Priority</label>
+                            <select
+                                id="priority"
+                                name="priority"
+                                value={formData.priority}
+                                onChange={handleChange}
+                                className="mt-2 w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-3"
+                            >
+                                <option value="P0">P0</option>
+                                <option value="P1">P1</option>
+                                <option value="P2">P2</option>
+                            </select>
                         </div>
-                        <button type='submit' className='mt-8 w-full p-3 bg-indigo-500 rounded-lg text-center text-white hover:bg-indigo-300'>Add</button>
-                    </form>
-                </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Add Task
+                    </button>
+                </form>
             </div>
         </div>
     );
