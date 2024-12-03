@@ -8,7 +8,7 @@ const CompleteTask = () => {
     const completedTasks = tasks.filter(task => task.status === 'Completed');
 
     return (
-        <div className="container mx-auto mt-10">
+        <div className="w-full max-w-6xl mx-auto px-6 py-10">
             <h1 className="text-4xl font-bold text-center text-indigo-600 mb-6">Completed Tasks</h1>
 
             {completedTasks.length > 0 ? (

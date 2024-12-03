@@ -8,7 +8,7 @@ const InProgressTask = () => {
     const inProgressTasks = tasks.filter(task => task.status === 'In Progress');
 
     return (
-        <div className="w-full max-w-7xl mx-auto px-4 py-6">
+        <div className="w-full max-w-6xl mx-auto px-6 py-10">
             <div className="mt-10">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">In Progress Tasks</h1>
             </div>
