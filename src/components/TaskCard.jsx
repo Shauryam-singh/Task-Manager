@@ -69,6 +69,7 @@ const TaskCard = ({
     };
 
     return (
+        <Link to={`/tasks/${id}`} className="task-card-link">
         <div className={`relative flex flex-col rounded-xl justify-center gap-4 bg-white w-72 max-h-[370px] shadow-xl border`}>
             {/* Delete Icon */}
             <button
@@ -131,7 +132,7 @@ const TaskCard = ({
                     </div>
                 </div>
             )}
-        </div>
+        </div></Link>
     );
 };
 

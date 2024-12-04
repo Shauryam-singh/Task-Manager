@@ -11,6 +11,7 @@ import PendingTask from './components/PendingTask';
 import Deployed from './components/Deployed';
 import Deferred from './components/Deferred';
 import EditTask from "./components/EditTask";
+import TaskDetails from './components/TaskDetails';
 import './App.css'
 
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/deferredTask" element={<Deferred />} />
         <Route path="/inProgressTask" element={<InProgressTask />} />
         <Route path="/statsTask" element={<Dashboard />} />
+        <Route path="/tasks/:id" element={<TaskDetails />} />
       </Routes>
     </div>
 
