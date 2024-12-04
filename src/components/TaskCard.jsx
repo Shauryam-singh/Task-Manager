@@ -19,6 +19,7 @@ const TaskCard = ({
     const task = useSelector(state => state.tasks.find(task => task.id === id));
 
     const [complete, setComplete] = useState(task?.completed || false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal visibility
 
     useEffect(() => {
         setComplete(task?.completed);
@@ -54,15 +55,24 @@ const TaskCard = ({
         setComplete(!complete);
     };
 
-    const handleDeleteTask = () => {
-        dispatch(removeTask(id));
+    const handleDeleteClick = () => {
+        setShowDeleteModal(true); // Show modal on delete button click
+    };
+
+    const handleConfirmDelete = () => {
+        dispatch(removeTask(id)); // Delete the task
+        setShowDeleteModal(false); // Close the modal after confirming
+    };
+
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false); // Close modal without deleting
     };
 
     return (
         <div className={`relative flex flex-col rounded-xl justify-center gap-4 bg-white w-72 max-h-[370px] shadow-xl border`}>
             {/* Delete Icon */}
             <button
-                onClick={handleDeleteTask}
+                onClick={handleDeleteClick}
                 className="absolute top-2 right-2 text-red-500 hover:text-red-700 z-10"
             >
                 <AiOutlineDelete className="w-6 h-6" />
@@ -108,6 +118,19 @@ const TaskCard = ({
                     {complete ? 'Completed' : status}
                 </button>
             </div>
+
+            {/* Confirmation Modal */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-md">
+                        <h2 className="text-lg font-bold">Are you sure you want to delete this task?</h2>
+                        <div className="mt-4 flex justify-end gap-4">
+                            <button onClick={handleCancelDelete} className="bg-gray-300 p-2 rounded-md">Cancel</button>
+                            <button onClick={handleConfirmDelete} className="bg-red-500 text-white p-2 rounded-md">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
