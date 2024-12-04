@@ -12,6 +12,7 @@ const AllTasks = () => {
     const [endDate, setEndDate] = useState(null);
     const [statusFilter, setStatusFilter] = useState("All");
     const [priorityFilter, setPriorityFilter] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
 
     const filteredTasks = tasks.filter((task) => {
         const taskDate = new Date(task.startDate);
@@ -22,7 +23,10 @@ const AllTasks = () => {
             statusFilter === "All" || task.status === statusFilter;
         const isPriorityMatch =
             priorityFilter === "All" || task.priority === priorityFilter;
-        return isDateInRange && isStatusMatch && isPriorityMatch;
+        const isSearchMatch = task.title
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+        return isDateInRange && isStatusMatch && isPriorityMatch && isSearchMatch;
     });
 
     return (
@@ -41,6 +45,15 @@ const AllTasks = () => {
                 <div className="text-indigo-600 font-medium text-lg">
                     All Tasks ({filteredTasks.length})
                 </div>
+            </div>
+            <div className="mb-6">
+                <input
+                    type="text"
+                    placeholder="Search tasks by title..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full p-2 border rounded-lg"
+                />
             </div>
             <div
                 className={`${toggle ? "block" : "hidden"} bg-gray-100 p-6 rounded-lg shadow-md mb-8 transition duration-300`}
