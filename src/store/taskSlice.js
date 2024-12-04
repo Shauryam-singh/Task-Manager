@@ -22,21 +22,16 @@ const taskSlice = createSlice({
     },
     removeTask: (state, action) => {
       const taskIndex = state.findIndex((task) => task.id === action.payload);
-      state.splice(taskIndex, 1);
+      if (taskIndex !== -1) state.splice(taskIndex, 1);
       localStorage.setItem("tasks", JSON.stringify(state));
     },
     toggleTaskCompleted: (state, action) => {
       const task = state.find((task) => task.id === action.payload);
       if (task) {
-         if (task.status !== "completed") {
-           task.status = "Completed";
-           task.endDate = new Date().toISOString();
-         } else {
-           task.status = "Pending";
-           task.endDate = null;
-         }
-          localStorage.setItem("tasks", JSON.stringify(state));
+        task.status = task.status !== "Completed" ? "Completed" : "Pending";
+        task.endDate = task.status === "Completed" ? new Date().toISOString() : null;
       }
+      localStorage.setItem("tasks", JSON.stringify(state));
     },
     updateTask: (state, action) => {
       const { id, ...updatedTaskFields } = action.payload;
@@ -49,9 +44,6 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, removeTask, toggleTaskCompleted, updateTask } =
-  taskSlice.actions;
-export default taskSlice.reducer;
-
+export const { addTask, removeTask, toggleTaskCompleted, updateTask } = taskSlice.actions;
 export const selectAllTasks = (state) => state.tasks;
-
+export default taskSlice.reducer;

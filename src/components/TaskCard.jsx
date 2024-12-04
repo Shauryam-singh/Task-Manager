@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleTaskCompleted } from '../store/taskSlice';
+import { toggleTaskCompleted, removeTask } from '../store/taskSlice';
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const TaskCard = ({
     id,
@@ -15,17 +16,17 @@ const TaskCard = ({
     priority,
 }) => {
     const dispatch = useDispatch();
-    const task = useSelector(state => state.tasks.find(task => task.id === id)); // Get task from redux store
+    const task = useSelector(state => state.tasks.find(task => task.id === id));
 
     const [complete, setComplete] = useState(task?.completed || false);
 
     useEffect(() => {
-        setComplete(task?.completed); // Sync the local state with Redux store when task state changes
+        setComplete(task?.completed);
     }, [task?.completed]);
 
     const getDate = (dateString) => {
         const dateObject = new Date(dateString);
-        return dateObject.toLocaleDateString(); // Format date
+        return dateObject.toLocaleDateString();
     };
 
     const startDateFormatted = getDate(startDate);
@@ -49,17 +50,32 @@ const TaskCard = ({
     };
 
     const handleToggleCompleted = () => {
-        dispatch(toggleTaskCompleted(id)); // Toggle task completed status in Redux store
-        setComplete(!complete); // Update local state
+        dispatch(toggleTaskCompleted(id));
+        setComplete(!complete);
+    };
+
+    const handleDeleteTask = () => {
+        dispatch(removeTask(id));
     };
 
     return (
-        <div className={`flex flex-col rounded-xl justify-center gap-4 bg-white w-72 max-h-[370px] shadow-xl border`}>
+        <div className={`relative flex flex-col rounded-xl justify-center gap-4 bg-white w-72 max-h-[370px] shadow-xl border`}>
+            {/* Delete Icon */}
+            <button
+                onClick={handleDeleteTask}
+                className="absolute top-2 right-2 text-red-500 hover:text-red-700 z-10"
+            >
+                <AiOutlineDelete className="w-6 h-6" />
+            </button>
+
+            {/* Status Section */}
             <div
                 className={`relative bg-clip-border mt-6 ml-4 mr-4 rounded-lg ${getStatusColor(status)} shadow-md h-45`}>
                 <h1 className="anton-regular text-end pt-2 pr-3 text-sm">{priority}</h1>
                 <h1 className="font-bold text-center text-xl py-4 mb-5 ubuntu-bold">{title}</h1>
             </div>
+
+            {/* Task Details */}
             <div className="border-0 p-2 text-center">
                 <p className="poppins-light">{description}</p>
                 <div className="flex justify-between mt-[5px] text-sm font-semibold py-2 px-4">
@@ -73,6 +89,8 @@ const TaskCard = ({
                     </div>
                 </div>
             </div>
+
+            {/* Footer */}
             <div className="footer p-3 flex items-center justify-between">
                 <Link
                     to={`/editTask/${id}`}
@@ -86,8 +104,7 @@ const TaskCard = ({
                     type="button"
                     className={`flex items-center justify-center gap-2 text-black select-none focus:outline-none shadow-md uppercase font-bold text-xs py-2 px-6 rounded-lg ${complete
                         ? 'bg-green-200 text-green-800'
-                        : `${getStatusColor(status)}`
-                        }`}>
+                        : `${getStatusColor(status)}`}`}>
                     {complete ? 'Completed' : status}
                 </button>
             </div>
@@ -96,7 +113,7 @@ const TaskCard = ({
 };
 
 TaskCard.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,

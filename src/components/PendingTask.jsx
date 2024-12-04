@@ -18,6 +18,7 @@ const PendingTask = () => {
                         {pendingTasks.map(task => (
                             <TaskCard
                                 key={task.id}
+                                id={task.id}
                                 title={task.title}
                                 description={task.description}
                                 startDate={task.startDate}
