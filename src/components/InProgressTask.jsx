@@ -9,9 +9,7 @@ const InProgressTask = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-10">
-            <div className="mt-10">
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">In Progress Tasks</h1>
-            </div>
+            <h1 className="text-4xl font-extrabold text-center text-gray-800">In Progress Tasks</h1>
             {
                 inProgressTasks.length > 0 ? (
                     <div className="flex flex-wrap gap-6 justify-center mt-6 overflow-auto">

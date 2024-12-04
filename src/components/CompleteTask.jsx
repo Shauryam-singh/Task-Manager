@@ -9,7 +9,7 @@ const CompleteTask = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-10">
-            <h1 className="text-4xl font-bold text-center text-indigo-600 mb-6">Completed Tasks</h1>
+            <h1 className="text-4xl font-extrabold text-center text-gray-800">Completed Tasks</h1>
 
             {completedTasks.length > 0 ? (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8 overflow-y-auto max-h-[70vh] px-4">

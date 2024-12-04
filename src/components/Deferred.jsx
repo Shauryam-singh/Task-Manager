@@ -9,9 +9,7 @@ const Deferred = () => {
 
     return (
         <div className="w-[90%] lg:w-[70%] mx-auto py-8">
-            <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">
-                Deferred Tasks
-            </h1>
+            <h1 className="text-4xl font-extrabold text-center text-gray-800">Deferred Tasks</h1>
             {deferredTasks.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-5 overflow-y-auto h-[50vh] sm:h-[70vh]">
                     {deferredTasks.map((task) => (
