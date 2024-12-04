@@ -53,7 +53,7 @@ const EditTask = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-10">
-            <h1 className="text-4xl font-bold text-center text-indigo-600 mb-8">Edit Task</h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-800 mb-8">Edit Task</h1>
             <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl mx-auto">
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Title */}
@@ -86,7 +86,7 @@ const EditTask = () => {
                     </div>
 
                     {/* Dates */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label htmlFor="startDate" className="block text-sm font-semibold text-gray-700">Start Date</label>
                             <DatePicker
@@ -108,7 +108,7 @@ const EditTask = () => {
                     </div>
 
                     {/* Status and Priority */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label htmlFor="status" className="block text-sm font-semibold text-gray-700">Status</label>
                             <select

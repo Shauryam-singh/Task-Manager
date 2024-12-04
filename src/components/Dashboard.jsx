@@ -23,7 +23,7 @@ const Dashboard = () => {
 
     return (
         <div className="mx-auto w-[90%] lg:w-[80%] py-8">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center text-gray-800">Tasks Overview</h1>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center text-gray-800">Tasks Overview</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {stats.map(({ label, total, bg }, index) => (
                     <Card key={index} bg={bg} label={label} count={total} />

@@ -3,14 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const TaskDetails = () => {
-    const { id } = useParams(); // Get the task ID from the URL params
+    const { id } = useParams();
     const task = useSelector(state => state.tasks.find(task => task.id === parseInt(id)));
-
     const [taskDetails, setTaskDetails] = useState(task);
 
     useEffect(() => {
         if (!task) {
-            // Optionally handle case where task doesn't exist
+            // Handle case where task doesn't exist
         } else {
             setTaskDetails(task);
         }
@@ -42,7 +41,8 @@ const TaskDetails = () => {
                 <h1 className="text-3xl font-extrabold text-gray-800 mb-4">{taskDetails.title}</h1>
                 <p className="text-lg text-gray-600 mb-6">{taskDetails.description}</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {/* Responsive Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                         <h3 className="text-lg font-semibold text-gray-700">Start Date</h3>
                         <p className="text-gray-600">{startDateFormatted}</p>
@@ -53,7 +53,7 @@ const TaskDetails = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                         <h3 className="text-lg font-semibold text-gray-700">Status</h3>
                         <p className="text-gray-600">{taskDetails.status}</p>
@@ -64,14 +64,14 @@ const TaskDetails = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
                         <h3 className="text-lg font-semibold text-gray-700">Assignee</h3>
-                        <p className="text-gray-600">Mr. Shauryam</p>
+                        <p className="text-gray-600">Mr. IDK</p>
                     </div>
                 </div>
 
-                <Link to={`/editTask/${taskDetails.id}`} className="mt-4 inline-block text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg py-2 px-6 text-lg font-semibold">
+                <Link to={`/editTask/${taskDetails.id}`} className="mt-4 inline-block text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg py-2 px-6 text-sm font-semibold">
                     Edit Task
                 </Link>
             </div>

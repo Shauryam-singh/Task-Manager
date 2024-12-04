@@ -19,7 +19,7 @@ const TaskCard = ({
     const task = useSelector(state => state.tasks.find(task => task.id === id));
 
     const [complete, setComplete] = useState(task?.completed || false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false); // State for modal visibility
+    const [showDeleteModal, setShowDeleteModal] = useState(false); 
 
     useEffect(() => {
         setComplete(task?.completed);
@@ -56,21 +56,20 @@ const TaskCard = ({
     };
 
     const handleDeleteClick = () => {
-        setShowDeleteModal(true); // Show modal on delete button click
+        setShowDeleteModal(true); 
     };
 
     const handleConfirmDelete = () => {
-        dispatch(removeTask(id)); // Delete the task
-        setShowDeleteModal(false); // Close the modal after confirming
+        dispatch(removeTask(id)); 
+        setShowDeleteModal(false); 
     };
 
     const handleCancelDelete = () => {
-        setShowDeleteModal(false); // Close modal without deleting
+        setShowDeleteModal(false); 
     };
 
     return (
-        <Link to={`/tasks/${id}`} className="task-card-link">
-        <div className={`relative flex flex-col rounded-xl justify-center gap-4 bg-white w-72 max-h-[370px] shadow-xl border`}>
+        <div className="relative flex flex-col rounded-xl justify-center gap-4 bg-white w-full sm:w-72 max-h-[370px] shadow-xl border">
             {/* Delete Icon */}
             <button
                 onClick={handleDeleteClick}
@@ -80,21 +79,23 @@ const TaskCard = ({
             </button>
 
             {/* Status Section */}
-            <div
-                className={`relative bg-clip-border mt-6 ml-4 mr-4 rounded-lg ${getStatusColor(status)} shadow-md h-45`}>
-                <h1 className="anton-regular text-end pt-2 pr-3 text-sm">{priority}</h1>
-                <h1 className="font-bold text-center text-xl py-4 mb-5 ubuntu-bold">{title}</h1>
-            </div>
+            <Link to={`/tasks/${id}`} className="task-card-link">
+                <div
+                    className={`relative bg-clip-border mt-6 ml-4 mr-4 rounded-lg ${getStatusColor(status)} shadow-md h-45`}>
+                    <h1 className="anton-regular text-end pt-2 pr-3 text-sm">{priority}</h1>
+                    <h1 className="font-bold text-center text-xl py-4 mb-5 ubuntu-bold">{title}</h1>
+                </div>
+            </Link>
 
             {/* Task Details */}
             <div className="border-0 p-2 text-center">
                 <p className="poppins-light">{description}</p>
-                <div className="flex justify-between mt-[5px] text-sm font-semibold py-2 px-4">
+                <div className="flex flex-col sm:flex-row justify-between mt-[5px] text-sm font-semibold py-2 px-4">
                     <div className="flex justify-center flex-col">
                         <p>Start Date</p>
                         <p className="font-light">{startDateFormatted}</p>
                     </div>
-                    <div className="flex justify-center flex-col">
+                    <div className="flex justify-center flex-col mt-4 sm:mt-0">
                         <p>End Date</p>
                         <p className="font-light">{endDateFormatted}</p>
                     </div>
@@ -109,7 +110,7 @@ const TaskCard = ({
                 >
                     Edit
                 </Link>
-                <p className="font-light text-xs block text-black">{assignee || 'Mr. Shauryam'}</p>
+                <p className="font-light text-xs block text-black">{assignee || 'Mr. IDK'}</p>
                 <button
                     onClick={handleToggleCompleted}
                     type="button"
@@ -122,7 +123,7 @@ const TaskCard = ({
 
             {/* Confirmation Modal */}
             {showDeleteModal && (
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <h2 className="text-lg font-bold">Are you sure you want to delete this task?</h2>
                         <div className="mt-4 flex justify-end gap-4">
@@ -132,7 +133,7 @@ const TaskCard = ({
                     </div>
                 </div>
             )}
-        </div></Link>
+        </div>
     );
 };
 

@@ -9,10 +9,10 @@ const CompleteTask = () => {
 
     return (
         <div className="w-full max-w-6xl mx-auto px-6 py-10">
-            <h1 className="text-4xl font-extrabold text-center text-gray-800">Completed Tasks</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-gray-800">Completed Tasks</h1>
 
             {completedTasks.length > 0 ? (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-8 overflow-y-auto max-h-[70vh] px-4">
+                <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8 overflow-y-auto max-h-[70vh] px-4 sm:px-6 lg:px-8">
                     {completedTasks.map(task => (
                         <TaskCard
                             key={task.id}
