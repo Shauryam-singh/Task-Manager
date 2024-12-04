@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import PendingTask from './components/PendingTask';
 import Deployed from './components/Deployed';
 import Deferred from './components/Deferred';
+import EditTask from "./components/EditTask";
 import './App.css'
 
 
@@ -22,7 +23,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AllTasks />} />
         <Route path="/addTask" element={<AddTask />} />
-        <Route path="/allTask" element={<AllTasks />} />
+        <Route path="/tasks" element={<AllTasks />} />
+        <Route path="/editTask/:id" element={<EditTask />} />
         <Route path="/completeTask" element={<CompleteTask />} />
         <Route path="/pendingTask" element={<PendingTask />} />
         <Route path="/deployedTask" element={<Deployed />} />

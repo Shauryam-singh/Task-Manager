@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTaskCompleted } from '../store/taskSlice';
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 const TaskCard = ({
     id,
@@ -73,6 +74,12 @@ const TaskCard = ({
                 </div>
             </div>
             <div className="footer p-3 flex items-center justify-between">
+                <Link
+                    to={`/editTask/${id}`}
+                    className="text-blue-500 hover:underline"
+                >
+                    Edit
+                </Link>
                 <p className="font-light text-xs block text-black">{assignee || 'Mr. Shauryam'}</p>
                 <button
                     onClick={handleToggleCompleted}
