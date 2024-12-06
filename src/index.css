@@ -2,21 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg-primary: #ffffff;
-  --text-primary: #000000;
-  --sidebar-bg: #6366f1;
-  --sidebar-hover: #9ca3af;
-}
-
-.dark {
-  --bg-primary: #1a1a1a;
-  --text-primary: #ffffff;
-  --sidebar-bg: #312e81;
-  --sidebar-hover: #4b5563;
-}
-
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
+}
+:root {
+  /* Light mode colors */
+  --bg-primary: #ffffff;
+  --text-primary: #111827;  /* gray-900 */
+  --text-secondary: #4b5563;  /* gray-600 */
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;  /* gray-200 */
+  --sidebar-bg: #6366f1;  /* indigo-500 */
+  --link-color: #4f46e5;  /* indigo-600 */
+  --link-hover: #4338ca;  /* indigo-700 */
+  
+  /* Status colors - Light mode */
+  --blue-status: #2563eb;  /* blue-600 */
+  --teal-status: #0f766e;  /* teal-700 */
+  --yellow-status: #d97706; /* amber-600 */
+  --pink-status: #db2777;  /* pink-600 */
+}
+
+.dark {
+  /* Dark mode colors with proper contrast */
+  --bg-primary: #111827;  /* gray-900 */
+  --text-primary: #f3f4f6;  /* gray-100 */
+  --text-secondary: #d1d5db;  /* gray-300 */
+  --card-bg: #1f2937;  /* gray-800 */
+  --card-border: #374151;  /* gray-700 */
+  --sidebar-bg: #312e81;  /* indigo-900 */
+  --link-color: #818cf8;  /* indigo-400 */
+  --link-hover: #a5b4fc;  /* indigo-300 */
+  
+  /* Status colors - Dark mode (brighter for visibility) */
+  --blue-status: #60a5fa;  /* blue-400 */
+  --teal-status: #2dd4bf;  /* teal-400 */
+  --yellow-status: #fbbf24; /* amber-400 */
+  --pink-status: #f472b6;  /* pink-400 */
+}
+
+/* Add smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
