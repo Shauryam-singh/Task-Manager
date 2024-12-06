@@ -1,6 +1,5 @@
-
-
 import { Route, Routes } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import AddTask from './components/AddTask';
 import Sidebar from './components/Sidebar';
 import AllTasks from './components/AllTasks';
@@ -16,10 +15,11 @@ import './App.css'
 
 
 const App = () => {
+   const theme = useSelector((state) => state.theme);
 
   return (
 
-    <div className='flex h-full'>
+    <div className={`flex h-full ${theme === 'dark' ? 'dark' : ''}`}>
       <Sidebar />
       <Routes>
         <Route path="/" element={<AllTasks />} />
