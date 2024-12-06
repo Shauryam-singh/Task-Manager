@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #000000;
+  --sidebar-bg: #6366f1;
+  --sidebar-hover: #9ca3af;
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --text-primary: #ffffff;
+  --sidebar-bg: #312e81;
+  --sidebar-hover: #4b5563;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
