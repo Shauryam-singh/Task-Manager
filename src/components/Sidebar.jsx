@@ -1,16 +1,37 @@
 import { GrTask } from "react-icons/gr";
-import { MdDashboard, MdOutlineTaskAlt, MdPendingActions, MdCloudDone, MdOutlineAccessTimeFilled, MdAddTask, MdQueryStats } from "react-icons/md";
+import { MdDashboard, MdOutlineTaskAlt, MdPendingActions, MdCloudDone, 
+         MdOutlineAccessTimeFilled, MdAddTask, MdQueryStats } from "react-icons/md";
+import { FiSun, FiMoon } from "react-icons/fi";
 import { GrInProgress } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from '../store/themeSlice';
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const theme = useSelector((state) => state.theme);
+
     return (
-        <div className="bg-indigo-500 min-h-[100vh] sm:min-h-screen w-[5rem] sm:w-[19rem] flex flex-col gap-4 roboto-regular">
-            <div className="flex items-center gap-2 justify-center h-16 text-white text-2xl font-bold mt-6">
-                <GrTask />
-                <span className='sm:block hidden'>
-                    Task Manager
-                </span>
+        <div className="bg-[var(--sidebar-bg)] min-h-[100vh] sm:min-h-screen w-[5rem] sm:w-[19rem] 
+                        flex flex-col gap-4 roboto-regular transition-colors duration-200">
+            <div className="flex items-center gap-2 justify-between px-6 h-16 text-white text-2xl font-bold mt-6">
+                <div className="flex items-center gap-2">
+                    <GrTask />
+                    <span className='sm:block hidden'>
+                        Task Manager
+                    </span>
+                </div>
+                <button
+                    onClick={() => dispatch(toggleTheme())}
+                    className="p-2 rounded-full hover:bg-[var(--sidebar-hover)] transition-colors duration-200"
+                    aria-label="Toggle theme"
+                >
+                    {theme === 'dark' ? (
+                        <FiSun className="text-2xl text-yellow-300" />
+                    ) : (
+                        <FiMoon className="text-2xl text-gray-300" />
+                    )}
+                </button>
             </div>
             <nav className="flex gap-10 justify-start">
                 <ul className="py-6 flex flex-col justify-start">
